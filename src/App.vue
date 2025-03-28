@@ -1,26 +1,54 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>{{ title }}</h1>
+  <div class="backdrop">
+    <button :disabled="isPlaying" @click="start">Play<span v-show="score!=null && !isPlaying"> again</span>!</button>
+    <Block v-if="isPlaying" :delay="timer" @end="endGame"/>
+    <Result v-if="score!=null && !isPlaying" :score="score"/>
+  </div>
+  
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import Block from './components/Block.vue'
+import Result from './components/Result.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components:{ Block, Result },
+  data() {
+    return {
+      isPlaying: false,
+      title: "Test your reaction time!",
+      timer: null,
+      score: null
+    }
+  },
+  methods: {
+    start() {
+      if (!this.isPlaying) {
+        this.timer = 2000 + Math.random()*5000
+        this.isPlaying = true
+        console.log(this.timer)
+      }
+    },
+    endGame(reactionTime) {
+      this.isPlaying = false
+      console.log(reactionTime)
+      this.score = reactionTime
+    }
   }
 }
 </script>
 
 <style>
-#app {
+#app, .mnodals {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #444;
   margin-top: 60px;
 }
+
 </style>
