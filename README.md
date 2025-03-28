@@ -1,3 +1,18 @@
+Reaction timer!
+
+Very simple reaction time test. The average human has a reaction time of 250ms. Professional athletes range between 160ms-210ms. How quick are you?
+
+
+
+
+
+
+
+
+
+
+
+
 # modal-project
 
 ## Project setup
